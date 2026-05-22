@@ -10,8 +10,6 @@ export default function SearchBar({ searchQuery, setSearchQuery }) {
         width: "100%",
         maxWidth: "500px",
         marginBottom: "20px",
-        borderRadius: "6px",
-        border: "1px solid #ccc",
       }}
     />
   );
