@@ -1,0 +1,20 @@
+[
+  {
+    "name": "Jira",
+    "description": "Issue tracking system",
+    "url": "https://jira.company.com",
+    "department": "Development"
+  },
+  {
+    "name": "GitHub",
+    "description": "Code repository platform",
+    "url": "https://github.com",
+    "department": "Development"
+  },
+  {
+    "name": "Outlook",
+    "description": "Email system",
+    "url": "https://outlook.office.com",
+    "department": "HR"
+  }
+]
