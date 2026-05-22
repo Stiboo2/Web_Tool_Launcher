@@ -1,7 +1,22 @@
-src/
-├── data/
-│   └── tools.json
-├── components/
-│   └── ToolCard.jsx
-├── App.jsx
-└── main.jsx
+team-tools-portal/
+│
+├── public/
+│
+├── src/
+│
+│   ├── data/
+│   │   └── tools.json
+│
+│   ├── components/
+│   │   ├── SearchBar.jsx
+│   │   ├── ToolCard.jsx
+│   │   └── ToolModal.jsx
+│
+│   ├── App.jsx
+│   ├── main.jsx
+│   ├── index.css
+│
+│
+├── package.json
+├── vite.config.js
+└── index.html

@@ -2,16 +2,16 @@ import { useState, useMemo, useEffect } from "react";
 import tools from "./data/tools.json";
 import ToolCard from "./components/ToolCard";
 import SearchBar from "./components/SearchBar";
+import ToolModal from "./components/ToolModal";
 
 export default function App() {
   const [searchQuery, setSearchQuery] = useState("");
   const [favorites, setFavorites] = useState([]);
+  const [selectedTool, setSelectedTool] = useState(null);
 
   useEffect(() => {
     const saved = localStorage.getItem("favorites");
-    if (saved) {
-      setFavorites(JSON.parse(saved));
-    }
+    if (saved) setFavorites(JSON.parse(saved));
   }, []);
 
   useEffect(() => {
@@ -38,19 +38,19 @@ export default function App() {
     });
   }, [searchQuery]);
 
-  const favoriteTools = useMemo(() => {
-    return filteredTools.filter((tool) => favorites.includes(tool.name));
-  }, [filteredTools, favorites]);
+  const favoriteTools = useMemo(
+    () => filteredTools.filter((t) => favorites.includes(t.name)),
+    [filteredTools, favorites],
+  );
 
-  const nonFavoriteTools = useMemo(() => {
-    return filteredTools.filter((tool) => !favorites.includes(tool.name));
-  }, [filteredTools, favorites]);
+  const nonFavoriteTools = useMemo(
+    () => filteredTools.filter((t) => !favorites.includes(t.name)),
+    [filteredTools, favorites],
+  );
 
   const groupedTools = useMemo(() => {
     return nonFavoriteTools.reduce((acc, tool) => {
-      if (!acc[tool.department]) {
-        acc[tool.department] = [];
-      }
+      if (!acc[tool.department]) acc[tool.department] = [];
       acc[tool.department].push(tool);
       return acc;
     }, {});
@@ -62,11 +62,9 @@ export default function App() {
 
       <SearchBar searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
 
-      {/* ⭐ Favorites */}
       {favoriteTools.length > 0 && (
         <div style={{ marginBottom: "30px" }}>
           <h2>⭐ Favorites</h2>
-
           <div className="grid">
             {favoriteTools.map((tool) => (
               <ToolCard
@@ -74,17 +72,16 @@ export default function App() {
                 tool={tool}
                 isFavorite={true}
                 onToggleFavorite={toggleFavorite}
+                onOpen={() => setSelectedTool(tool)}
               />
             ))}
           </div>
         </div>
       )}
 
-      {/* Departments */}
       {Object.entries(groupedTools).map(([department, tools]) => (
         <div key={department} style={{ marginBottom: "30px" }}>
           <h2>{department}</h2>
-
           <div className="grid">
             {tools.map((tool) => (
               <ToolCard
@@ -92,11 +89,21 @@ export default function App() {
                 tool={tool}
                 isFavorite={favorites.includes(tool.name)}
                 onToggleFavorite={toggleFavorite}
+                onOpen={() => setSelectedTool(tool)}
               />
             ))}
           </div>
         </div>
       ))}
+
+      {selectedTool && (
+        <ToolModal
+          tool={selectedTool}
+          onClose={() => setSelectedTool(null)}
+          onToggleFavorite={toggleFavorite}
+          isFavorite={favorites.includes(selectedTool.name)}
+        />
+      )}
     </div>
   );
 }

@@ -1,4 +1,9 @@
-export default function ToolCard({ tool, isFavorite, onToggleFavorite }) {
+export default function ToolCard({
+  tool,
+  isFavorite,
+  onToggleFavorite,
+  onOpen,
+}) {
   return (
     <div className="card">
       <h3>{tool.name}</h3>
@@ -6,7 +11,7 @@ export default function ToolCard({ tool, isFavorite, onToggleFavorite }) {
       <small>{tool.department}</small>
 
       <div style={{ marginTop: "10px" }}>
-        <button onClick={() => window.open(tool.url, "_blank")}>Open</button>
+        <button onClick={onOpen}>Details</button>
 
         <button onClick={() => navigator.clipboard.writeText(tool.url)}>
           Copy
