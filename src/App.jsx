@@ -9,15 +9,36 @@ export default function App() {
   const [searchQuery, setSearchQuery] = useState("");
   const [favorites, setFavorites] = useState([]);
   const [selectedTool, setSelectedTool] = useState(null);
+  const [toast, setToast] = useState("");
+  const [darkMode, setDarkMode] = useState(false);
 
   useEffect(() => {
-    const saved = localStorage.getItem("favorites");
-    if (saved) setFavorites(JSON.parse(saved));
+    const savedFavorites = localStorage.getItem("favorites");
+    if (savedFavorites) {
+      setFavorites(JSON.parse(savedFavorites));
+    }
+
+    const savedTheme = localStorage.getItem("darkMode");
+    if (savedTheme) {
+      setDarkMode(JSON.parse(savedTheme));
+    }
   }, []);
 
   useEffect(() => {
     localStorage.setItem("favorites", JSON.stringify(favorites));
   }, [favorites]);
+
+  useEffect(() => {
+    localStorage.setItem("darkMode", JSON.stringify(darkMode));
+  }, [darkMode]);
+
+  const showToast = (message) => {
+    setToast(message);
+
+    setTimeout(() => {
+      setToast("");
+    }, 5000);
+  };
 
   const toggleFavorite = (toolName) => {
     setFavorites((prev) =>
@@ -58,10 +79,91 @@ export default function App() {
   }, [nonFavoriteTools]);
 
   return (
-    <div style={{ padding: "20px" }}>
-      <h1>Team Tools Portal</h1>
+    <div
+      style={{
+        minHeight: "100vh",
+        padding: "20px",
+        background: darkMode ? "#111827" : "#f3f4f6",
+        color: darkMode ? "white" : "#111827",
+        transition: "all 0.3s ease",
+      }}
+    >
+      {/* TOAST */}
+      {toast && (
+        <div
+          style={{
+            position: "fixed",
+            top: "20px",
+            right: "20px",
+            background: "#2563eb",
+            color: "white",
+            padding: "14px 20px",
+            borderRadius: "8px",
+            boxShadow: "0 4px 12px rgba(0,0,0,0.2)",
+            zIndex: 9999,
+            animation: "fadeInOut 5s ease forwards",
+          }}
+        >
+          {toast}
+        </div>
+      )}
 
-      <SearchBar searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
+      <style>
+        {`
+          @keyframes fadeInOut {
+            0% {
+              opacity: 0;
+              transform: translateY(-10px);
+            }
+
+            10% {
+              opacity: 1;
+              transform: translateY(0);
+            }
+
+            90% {
+              opacity: 1;
+            }
+
+            100% {
+              opacity: 0;
+              transform: translateY(-10px);
+            }
+          }
+        `}
+      </style>
+
+      {/* HEADER */}
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+          marginBottom: "20px",
+        }}
+      >
+        <h1>Team Tools Portal</h1>
+
+        <button
+          onClick={() => setDarkMode(!darkMode)}
+          style={{
+            padding: "10px 14px",
+            borderRadius: "8px",
+            border: "none",
+            cursor: "pointer",
+            background: darkMode ? "#374151" : "white",
+            color: darkMode ? "white" : "#111827",
+          }}
+        >
+          {darkMode ? "☀ Light Mode" : "🌙 Dark Mode"}
+        </button>
+      </div>
+
+      <SearchBar
+        searchQuery={searchQuery}
+        setSearchQuery={setSearchQuery}
+        darkMode={darkMode}
+      />
 
       {favoriteTools.length > 0 && (
         <div style={{ marginBottom: "30px" }}>
@@ -75,6 +177,8 @@ export default function App() {
                 isFavorite={true}
                 onToggleFavorite={toggleFavorite}
                 onOpen={() => setSelectedTool(tool)}
+                showToast={showToast}
+                darkMode={darkMode}
               />
             ))}
           </div>
@@ -103,6 +207,8 @@ export default function App() {
                   isFavorite={favorites.includes(tool.name)}
                   onToggleFavorite={toggleFavorite}
                   onOpen={() => setSelectedTool(tool)}
+                  showToast={showToast}
+                  darkMode={darkMode}
                 />
               ))}
             </div>
@@ -116,6 +222,7 @@ export default function App() {
           onClose={() => setSelectedTool(null)}
           onToggleFavorite={toggleFavorite}
           isFavorite={favorites.includes(selectedTool.name)}
+          darkMode={darkMode}
         />
       )}
     </div>

@@ -5,6 +5,8 @@ export default function ToolCard({
   isFavorite,
   onToggleFavorite,
   onOpen,
+  showToast,
+  darkMode,
 }) {
   const color = departmentColors[tool.department] || departmentColors.Default;
 
@@ -14,25 +16,42 @@ export default function ToolCard({
       style={{
         position: "relative",
         padding: "15px",
-        borderRadius: "8px",
-        background: "white",
-        boxShadow: `0 2px 8px ${color}33`,
+        borderRadius: "10px",
+        cursor: "pointer",
+        background: darkMode ? "#1f2937" : "white",
+        color: darkMode ? "white" : "#111827",
+        boxShadow: darkMode
+          ? "0 2px 10px rgba(0,0,0,0.6)"
+          : `0 2px 8px ${color}33`,
         borderTop: `4px solid ${color}`,
+        transition: "all 0.2s ease",
       }}
     >
       <h3 style={{ margin: 0 }}>{tool.name}</h3>
 
-      <p style={{ margin: "5px 0", color: "#555" }}>{tool.description}</p>
+      <p
+        style={{
+          margin: "5px 0",
+          color: darkMode ? "#d1d5db" : "#555",
+        }}
+      >
+        {tool.description}
+      </p>
 
       <small style={{ color }}>{tool.department}</small>
 
-      {/* ACTION BAR */}
+      {/* ACTIONS */}
       <div className="actions">
         <button onClick={() => window.open(tool.url, "_blank")}>Open</button>
 
         <button onClick={() => onOpen(tool)}>Details</button>
 
-        <button onClick={() => navigator.clipboard.writeText(tool.url)}>
+        <button
+          onClick={async () => {
+            await navigator.clipboard.writeText(tool.url);
+            showToast?.("Copied to clipboard");
+          }}
+        >
           Copy
         </button>
 
@@ -63,13 +82,14 @@ export default function ToolCard({
             font-size: 12px;
             padding: 5px 8px;
             border: none;
-            border-radius: 4px;
-            background: #f3f4f6;
+            border-radius: 6px;
             cursor: pointer;
+            background: ${darkMode ? "#374151" : "#f3f4f6"};
+            color: ${darkMode ? "white" : "#111827"};
           }
 
           .actions button:hover {
-            background: #e5e7eb;
+            background: ${darkMode ? "#4b5563" : "#e5e7eb"};
           }
         `}
       </style>

@@ -19,27 +19,44 @@ export default function ToolModal({
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
+        zIndex: 999,
       }}
     >
       <div
         onClick={(e) => e.stopPropagation()}
         style={{
           background: "white",
-          padding: "20px",
-          borderRadius: "10px",
-          width: "400px",
+          padding: "24px",
+          borderRadius: "12px",
+          width: "420px",
+          boxShadow: "0 8px 24px rgba(0,0,0,0.2)",
         }}
       >
-        <h2>{tool.name}</h2>
+        <h2 style={{ marginTop: 0 }}>{tool.name}</h2>
+
         <p>{tool.description}</p>
+
         <p>
-          <b>Department:</b> {tool.department}
-        </p>
-        <p>
-          <b>URL:</b> {tool.url}
+          <strong>Department:</strong> {tool.department}
         </p>
 
-        <div style={{ marginTop: "15px" }}>
+        <p
+          style={{
+            wordBreak: "break-all",
+            color: "#2563eb",
+          }}
+        >
+          {tool.url}
+        </p>
+
+        <div
+          style={{
+            display: "flex",
+            gap: "10px",
+            marginTop: "20px",
+            flexWrap: "wrap",
+          }}
+        >
           <button onClick={() => window.open(tool.url, "_blank")}>Open</button>
 
           <button onClick={() => navigator.clipboard.writeText(tool.url)}>
