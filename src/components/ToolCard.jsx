@@ -1,9 +1,13 @@
+import { departmentColors } from "../utils/departmentColors";
+
 export default function ToolCard({
   tool,
   isFavorite,
   onToggleFavorite,
   onOpen,
 }) {
+  const color = departmentColors[tool.department] || departmentColors.Default;
+
   return (
     <div
       className="card"
@@ -12,16 +16,17 @@ export default function ToolCard({
         padding: "15px",
         borderRadius: "8px",
         background: "white",
-        boxShadow: "0 1px 4px rgba(0,0,0,0.1)",
+        boxShadow: `0 2px 8px ${color}33`,
+        borderTop: `4px solid ${color}`,
       }}
     >
       <h3 style={{ margin: 0 }}>{tool.name}</h3>
 
       <p style={{ margin: "5px 0", color: "#555" }}>{tool.description}</p>
 
-      <small>{tool.department}</small>
+      <small style={{ color }}>{tool.department}</small>
 
-      {/* ACTION BAR (always exists, just hidden visually) */}
+      {/* ACTION BAR */}
       <div className="actions">
         <button onClick={() => window.open(tool.url, "_blank")}>Open</button>
 

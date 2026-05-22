@@ -16,5 +16,137 @@
     "description": "Email system",
     "url": "https://outlook.office.com",
     "department": "HR"
+  },
+  {
+    "name": "Confluence",
+    "description": "Team documentation and knowledge base",
+    "url": "https://confluence.atlassian.com",
+    "department": "Development"
+  },
+  {
+    "name": "Slack",
+    "description": "Team communication platform",
+    "url": "https://slack.com",
+    "department": "Operations"
+  },
+  {
+    "name": "Teams",
+    "description": "Microsoft collaboration tool",
+    "url": "https://teams.microsoft.com",
+    "department": "Operations"
+  },
+  {
+    "name": "ServiceNow",
+    "description": "IT service management system",
+    "url": "https://servicenow.com",
+    "department": "IT"
+  },
+  {
+    "name": "Azure Portal",
+    "description": "Cloud infrastructure management",
+    "url": "https://portal.azure.com",
+    "department": "IT"
+  },
+  {
+    "name": "AWS Console",
+    "description": "Amazon cloud services management",
+    "url": "https://aws.amazon.com/console",
+    "department": "IT"
+  },
+  {
+    "name": "Google Drive",
+    "description": "Cloud file storage and sharing",
+    "url": "https://drive.google.com",
+    "department": "Operations"
+  },
+  {
+    "name": "Google Docs",
+    "description": "Online document editing",
+    "url": "https://docs.google.com",
+    "department": "Operations"
+  },
+  {
+    "name": "Google Sheets",
+    "description": "Spreadsheet tool",
+    "url": "https://sheets.google.com",
+    "department": "Operations"
+  },
+  {
+    "name": "Figma",
+    "description": "UI/UX design collaboration tool",
+    "url": "https://figma.com",
+    "department": "Design"
+  },
+  {
+    "name": "Adobe XD",
+    "description": "UI/UX design tool",
+    "url": "https://adobe.com/products/xd",
+    "department": "Design"
+  },
+  {
+    "name": "Photoshop",
+    "description": "Image editing software",
+    "url": "https://adobe.com/products/photoshop",
+    "department": "Design"
+  },
+  {
+    "name": "Notion",
+    "description": "All-in-one workspace for notes and docs",
+    "url": "https://notion.so",
+    "department": "Operations"
+  },
+  {
+    "name": "Zoom",
+    "description": "Video conferencing platform",
+    "url": "https://zoom.us",
+    "department": "HR"
+  },
+  {
+    "name": "Trello",
+    "description": "Task and project management tool",
+    "url": "https://trello.com",
+    "department": "Development"
+  },
+  {
+    "name": "Bitbucket",
+    "description": "Git repository management",
+    "url": "https://bitbucket.org",
+    "department": "Development"
+  },
+  {
+    "name": "Postman",
+    "description": "API testing platform",
+    "url": "https://postman.com",
+    "department": "Development"
+  },
+  {
+    "name": "Docker Hub",
+    "description": "Container image registry",
+    "url": "https://hub.docker.com",
+    "department": "IT"
+  },
+  {
+    "name": "Kubernetes Dashboard",
+    "description": "Cluster management interface",
+    "url": "https://kubernetes.io",
+    "department": "IT"
+  },
+  {
+    "name": "Canva",
+    "description": "Design and content creation tool",
+    "url": "https://canva.com",
+    "department": "Design"
+  },
+  {
+    "name": "Salesforce",
+    "description": "CRM platform for sales management",
+    "url": "https://salesforce.com",
+    "department": "Operations"
+  },
+  {
+    "name": "Monday.com",
+    "description": "Work operating system for teams",
+    "url": "https://monday.com",
+    "department": "Operations"
   }
 ]
