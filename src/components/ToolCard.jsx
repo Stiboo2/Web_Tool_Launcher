@@ -16,16 +16,15 @@ export default function ToolCard({
       }}
     >
       <h3 style={{ margin: 0 }}>{tool.name}</h3>
+
       <p style={{ margin: "5px 0", color: "#555" }}>{tool.description}</p>
+
       <small>{tool.department}</small>
 
-      {/* ALWAYS VISIBLE PRIMARY ACTION */}
-      <div style={{ marginTop: "10px" }}>
+      {/* ACTION BAR (always exists, just hidden visually) */}
+      <div className="actions">
         <button onClick={() => window.open(tool.url, "_blank")}>Open</button>
-      </div>
 
-      {/* HOVER ACTIONS */}
-      <div className="hover-actions">
         <button onClick={() => onOpen(tool)}>Details</button>
 
         <button onClick={() => navigator.clipboard.writeText(tool.url)}>
@@ -37,32 +36,35 @@ export default function ToolCard({
         </button>
       </div>
 
-      {/* CSS */}
       <style>
         {`
-          .hover-actions {
-            position: absolute;
-            bottom: 10px;
-            right: 10px;
-            display: none;
-            gap: 6px;
-          }
-
-          .card:hover .hover-actions {
+          .actions {
+            margin-top: 10px;
             display: flex;
+            gap: 6px;
+            opacity: 0;
+            transform: translateY(5px);
+            transition: all 0.2s ease;
+            pointer-events: none;
           }
 
-          .hover-actions button {
+          .card:hover .actions {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: auto;
+          }
+
+          .actions button {
             font-size: 12px;
             padding: 5px 8px;
             border: none;
             border-radius: 4px;
-            background: #f0f0f0;
+            background: #f3f4f6;
             cursor: pointer;
           }
 
-          .hover-actions button:hover {
-            background: #ddd;
+          .actions button:hover {
+            background: #e5e7eb;
           }
         `}
       </style>

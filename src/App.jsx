@@ -3,6 +3,7 @@ import tools from "./data/tools.json";
 import ToolCard from "./components/ToolCard";
 import SearchBar from "./components/SearchBar";
 import ToolModal from "./components/ToolModal";
+import { departmentColors } from "./utils/departmentColors";
 
 export default function App() {
   const [searchQuery, setSearchQuery] = useState("");
@@ -65,6 +66,7 @@ export default function App() {
       {favoriteTools.length > 0 && (
         <div style={{ marginBottom: "30px" }}>
           <h2>⭐ Favorites</h2>
+
           <div className="grid">
             {favoriteTools.map((tool) => (
               <ToolCard
@@ -79,22 +81,34 @@ export default function App() {
         </div>
       )}
 
-      {Object.entries(groupedTools).map(([department, tools]) => (
-        <div key={department} style={{ marginBottom: "30px" }}>
-          <h2>{department}</h2>
-          <div className="grid">
-            {tools.map((tool) => (
-              <ToolCard
-                key={tool.name}
-                tool={tool}
-                isFavorite={favorites.includes(tool.name)}
-                onToggleFavorite={toggleFavorite}
-                onOpen={() => setSelectedTool(tool)}
-              />
-            ))}
+      {Object.entries(groupedTools).map(([department, tools]) => {
+        const color = departmentColors[department] || departmentColors.Default;
+
+        return (
+          <div key={department} style={{ marginBottom: "30px" }}>
+            <h2
+              style={{
+                borderLeft: `4px solid ${color}`,
+                paddingLeft: "10px",
+              }}
+            >
+              {department}
+            </h2>
+
+            <div className="grid">
+              {tools.map((tool) => (
+                <ToolCard
+                  key={tool.name}
+                  tool={tool}
+                  isFavorite={favorites.includes(tool.name)}
+                  onToggleFavorite={toggleFavorite}
+                  onOpen={() => setSelectedTool(tool)}
+                />
+              ))}
+            </div>
           </div>
-        </div>
-      ))}
+        );
+      })}
 
       {selectedTool && (
         <ToolModal
